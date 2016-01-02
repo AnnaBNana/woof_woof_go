@@ -1,0 +1,223 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "museo-sans", sans-serif;
+	color: #696969;
+}
+/*front page*/
+.start {
+	text-align: right;
+	margin: 40px 20px 0 0;
+}
+.subtitle {
+	border-top: 1px solid #D2ED9E;
+	border-bottom: 1px solid #D2ED9E;
+	font-weight: 400;
+	font-size: 1.6em;
+	color: #A3C563;
+	padding: 20px 0;
+	margin: 10px auto;
+	width: 80%;
+	text-align: center;
+	font-weight: 700;
+}
+.main_header p {
+	padding: 10px;
+}
+.zipSearch{
+	display: none;
+}
+/*login page*/
+.register_header, .login_header {
+	color: #A3C563;
+	margin: 20px 0;
+	font-size: 2.6em;
+	text-align: center;
+}
+.register, .login {
+	display: inline-block;
+	vertical-align: top;
+	width: 45%;
+}
+.reg_form, .login_form {
+	width: 70%;
+	text-align: right;
+	border: 1px solid #A3C563;
+	margin: 0 auto;
+	padding: 10px;
+	box-shadow: 4px 4px #F3FAE4;
+}
+.reg_form p, .login_form p {
+	padding: 10px;
+	font-size: 1.4em;
+}
+.reg_form .ast {
+	font-size: 0.8em;
+	padding: 2px 10px;
+}
+#errors {
+	text-align: center;
+	margin: 30px;
+	font-size: 1.5em;
+	color: #8B2F5F;
+}
+
+/*welcome page*/
+.browse, .messages {
+	font-size: 0.8em;
+	margin: 30px 0;
+}
+.me, .pets {
+	display: inline-block;
+	vertical-align: top;
+	border: 1px solid #A3C563;
+	padding: 30px;
+	box-sizing: border-box;
+	width: 45%;
+	margin-left: 20px;
+	box-shadow: 4px 4px #F3FAE4;
+}
+.pet {
+	margin-top: 20px;
+}
+.name {
+	margin-bottom: 20px;
+}
+.browse {
+	border-top: 1px solid #C7C6C6;
+	border-bottom: 1px solid #C7C6C6;
+	margin: 50px 20px;
+}
+.browse h1 {
+	text-align: center;
+	margin: 20px 0;
+}
+.browse_btn a {
+	display: inline-block;
+	margin: 30px 0;
+}
+.mail {
+	border-bottom: 1px solid #C7C6C6;
+	margin: 50px 20px;
+}
+.mail h1 {
+	text-align: center;
+	margin: 30px 0;
+}
+.profile_pic, .pet_pic {
+	margin: 20px 0;
+}
+.profile_img {
+	width: 200px;
+}
+.pic_wrap {
+	display: inline-block;
+	margin: 0 20px 20px 0;
+}
+/*edit page*/
+.upload_msg {
+	color: #8B2F5F;
+	text-align: center;
+	font-size: 2em;
+}
+.profile form {
+	margin-bottom: 20px;
+	width: 55%;
+}
+.profile h2 {
+	text-align: center;
+	padding: 20px;
+}
+.textarea_label, .desc {
+	vertical-align: top;
+}
+/*map page styling */
+.back {
+	margin: 50px 0;
+	text-align: center;
+}
+/*generic element stylings for entire site*/
+.edit {
+	display: inline-block;
+	margin-bottom: 50px;
+}
+.edit a {
+	margin-right: 20px;
+}
+.nav_buttons {
+	text-align: center;
+}
+.button a {
+	padding: 14px;
+	color: #A3C563;
+	border: 1px solid #A3C563;
+	text-decoration: none;
+	font-size: 1.2em;
+	font-weight: bold;
+	box-sizing: border-box;
+	box-shadow: 4px 4px #F3FAE4;
+}
+.titles {
+	font-family: "fatfrank", sans-serif;
+	font-size: 4em;
+	color: #7A9E35;
+	padding: 20px 0 50px 0;
+	margin: 0 auto;
+	width: 50%;
+	text-align: center;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.flash {
+	color: #8B2F5F;
+	text-align: center;
+	font-size: 1.6em;
+	margin-bottom: 20px;
+	font-family: "museo-sans", sans-serif;
+}
+.small_title {
+	font-weight: bold;
+}
+input[type="text"], input[type="password"], textarea[type='text']{
+	padding: 4px;
+	font-size: 0.8em;
+	outline: none;
+	border: 1px solid #A3C563;
+	box-shadow: 4px 4px #F3FAE4;
+}
+textarea[type='text'] {
+	height: 5em;
+	width: 50%;
+	resize: none;
+}
+input[type="submit"] {
+	padding: 14px;
+	color: #A3C563;
+	border: 1px solid #A3C563;
+	background-color: #fff;
+	font-size: 1em;
+	display: block;
+	margin: 0 auto;
+	outline: none;
+	box-shadow: 4px 4px #F3FAE4;
+}
+form {
+	width: 70%;
+	text-align: right;
+	border: 1px solid #A3C563;
+	margin: 0 auto;
+	padding: 10px;
+	box-shadow: 4px 4px #F3FAE4;
+}
+form p {
+	padding: 10px;
+	font-size: 1.4em;
+}
+form .ast {
+	font-size: 0.8em;
+	padding: 2px 10px;
+}
+.logout {
+	text-align: center;
+	margin: 40px 0;
+}
