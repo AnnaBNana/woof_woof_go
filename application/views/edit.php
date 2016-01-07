@@ -6,13 +6,14 @@
 	<script src="https://use.typekit.net/zzk6kht.js"></script>
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 	<link rel="stylesheet" type="text/css" href="../../assets/style.css">
-	 <script language="javascript" type="text/javascript" src="../assets/map.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsU9iilPcFFDwBg5viGoImP5IGx5LOUJY&libraries=places"></script>
 	</script>
 	
 </head>
 <body>
-
+<!-- <div class="bg">
+	<img src="../../assets/bg.jpg">
+</div> -->
 	<h1 class="titles">Edit My Info</h1>
 
 	<div class="nav_buttons">
@@ -27,6 +28,8 @@
 			<h2>edit my info</h2>
 			<p>change my alias: <input type="text" name="alias" value="<?= $alias; ?>"></p>
 			<p>change my email: <input type="text" name="email" value="<?= $email; ?>"></p>
+			<p>my location: <input type="text" name="loc" value="<?= $primary_city; ?>"></p>
+			<p>times I'm available to meet: <input type="text" name="avail" value="<?= $availability; ?>"></p>
 			<p class="textarea_label">add a description: <textarea type="text" name="about" class="desc"><?= $about; ?></textarea></p>
 			<p><input type="submit" value="update my info"></p>
 		</form>
@@ -87,5 +90,6 @@
 	</div>
 
 	<p class="logout button"><a href="/traffic/end">Log me out</a></p>
+
 </body>
 </html>

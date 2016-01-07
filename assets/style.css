@@ -114,6 +114,27 @@
 	display: inline-block;
 	margin: 0 20px 20px 0;
 }
+/*profile page*/
+.profile_msg form {
+	border: none;
+	box-shadow: none;
+	width: 98%;
+	margin: 0 auto;
+	box-sizing: border-box;
+
+}
+.profile_msg input[type="text"], .profile_msg textarea[type="text"] {
+	width: 100%;
+}
+.profile_msg p {
+	padding: 10px 0;
+	text-align: left;
+}
+.profile_msg h1 {
+	text-align: center;
+	padding: 20px 0;
+	border-top: 1px solid #8B2F5F;
+}
 /*edit page*/
 .upload_msg {
 	color: #8B2F5F;
@@ -131,10 +152,119 @@
 .textarea_label, .desc {
 	vertical-align: top;
 }
-/*map page styling */
+/*map page*/
 .back {
 	margin: 50px 0;
 	text-align: center;
+}
+/*messages page*/
+.no_msg {
+	color: #8B2F5F;
+	text-align: center;
+	font-size: 1.6em;
+	margin-bottom: 20px;
+	font-family: "museo-sans", sans-serif;
+}
+.display_msg {
+	border-top: 1px solid #C7C6C6;
+	padding: 20px 0;
+	width: 90%;
+	margin: 0 auto;
+	text-align: left;
+	font-size: 1.2em;
+}
+.display_msg p {
+	padding: 10px 0;
+}
+.display_form form, .reply_form_vis form {
+	border: none;
+	border-top: 1px solid #C7C6C6;
+	padding: 20px 0;
+	width: 90%;
+	margin: 0 auto;
+	box-shadow: none;
+	text-align: left;
+	font-size: 0.8em;
+}
+.compose form {
+	border: none;
+	box-shadow: none;
+	text-align: left;
+	border-bottom: 1px solid #C7C6C6;
+	border-top: 1px solid #C7C6C6;
+	padding: 20px 0;
+	width: 90%;
+	margin: 0 auto;
+	font-size: 0.8em;
+}
+.reply_labels {
+	padding: 0 10px;
+	margin: 0;
+}
+.reply_form_vis form {
+	border-bottom: none;
+}
+.reply_form_vis input[type="text"], .display_form input[type="text"] {
+	width: 50%;
+}
+.compose textarea[type="text"] {
+	margin: 10px;
+	height: 12em;
+}
+.compose input[type="text"], .compose textarea[type="text"] {
+	width: 100%;
+	box-sizing: bored-box;
+}
+.compose input[type="submit"] {
+	font-size: 0.8em;
+}
+.reply_form {
+	display: none;
+}
+.mailbox table, .sent_mail table {
+	border: 1px solid #8B2F5F;
+	width: 90%;
+	margin: 0 auto 20px auto;
+	padding: 10px;
+	border-collapse: collapse;
+	box-shadow: 4px 4px #F2DBE7;
+}
+.mailbox th, .sent_mail th {
+	border-bottom: 1px solid #8B2F5F;
+	padding: 10px;
+	color: #8B2F5F;
+	background-color: #F2DDE8;
+}
+.mailbox td, .sent_mail td {
+	padding: 10px;
+	text-align: center;
+}
+.mailbox tr:nth-of-type(even), .sent_mail tr:nth-of-type(even) {
+	background-color: #FCF6F9;
+}
+.view_sent_btn a {
+	padding: 8px;
+	color: #8B2F5F;
+	border: 1px solid #8B2F5F;
+	text-decoration: none;
+	font-size: 0.8em;
+	box-sizing: border-box;
+	box-shadow: 4px 4px #F2DDE8;
+	background-color: white;
+	text-align: center;
+}
+.view_sent_btn {
+	text-align: center;
+	margin-bottom: 20px;
+}
+.sent_mail_container {
+	display: none;
+}
+/*browse page*/
+.user_profiles {
+	padding: 20px;
+	width: 99%;
+	margin: 0 auto;
 }
 /*generic element stylings for entire site*/
 .edit {
@@ -156,6 +286,7 @@
 	font-weight: bold;
 	box-sizing: border-box;
 	box-shadow: 4px 4px #F3FAE4;
+	background-color: white;
 }
 .titles {
 	font-family: "fatfrank", sans-serif;
@@ -200,6 +331,7 @@ input[type="submit"] {
 	margin: 0 auto;
 	outline: none;
 	box-shadow: 4px 4px #F3FAE4;
+	background-color: white;
 }
 form {
 	width: 70%;
@@ -208,6 +340,7 @@ form {
 	margin: 0 auto;
 	padding: 10px;
 	box-shadow: 4px 4px #F3FAE4;
+	background-color: white;
 }
 form p {
 	padding: 10px;

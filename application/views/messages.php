@@ -3,11 +3,43 @@
 <head>
 	<title>Woof Woof Go!</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 	<script src="https://use.typekit.net/zzk6kht.js"></script>
+
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
 	<link rel="stylesheet" type="text/css" href="../../assets/style.css">
-	 <script language="javascript" type="text/javascript" src="../assets/map.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsU9iilPcFFDwBg5viGoImP5IGx5LOUJY&libraries=places"></script>
+
+	<script>
+		$(document).ready(function(){
+			$('.open').click(function(){
+				var msg_id = $(this).attr("id");
+				console.log(msg_id);
+				$.get("/queries/msg_partial/" + msg_id, function(res) {
+					$('#message').html(res);
+		        });
+				return false;
+			});
+			$('.reply').click(function(){
+				var msg_id = $(this).attr("id");
+				console.log(msg_id);
+				$.get("/queries/reply_partial/" + msg_id, function(res) {
+					$('#message').html(res);
+		        });
+				return false;
+			});
+			$('.sent').click(function(){
+				$('.received_mail_container').css("display", "none");
+				$('.sent_mail_container').attr("class", "sent_show");
+				return false;
+			});
+			$('.received').click(function(){
+				$('.received_mail_container').css("display", "inline");
+				$('.sent_show').attr("class", "sent_mail_container");
+				return false;
+			});
+
+		});
 	</script>
 	
 </head>
@@ -15,7 +47,97 @@
 
 
 	<h1 class="titles">My Messages</h1>
-	<p class="edit button"><a href="/traffic/success/<?= $id;?>">back to my profile</a></p>
+	<div class="nav_buttons">
+		<p class="edit button"><a href="/traffic/success/<?= $id; ?>">back to my profile</a><a href="/traffic/map">view dog park map</a></p>
+	</div>
+
+	<div class="flash"><?= $this->session->flashdata('msg_return'); ?></div>
+
+	<div class="received_mail_container">
+		<?php if($messages != null) { ?>
+		<div class="mailbox">
+			<table>
+				<thead>
+					<th>From</th>
+					<th>Subject</th>
+					<th>Read</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					<?php foreach ($messages as $message) { 
+						?>
+					<tr>
+						<td><?= $message['alias']; ?></td>
+						<td><?= $message['subject']; ?></td>
+						<?php if($message['status'] == 'unread') { ?>
+						<td class="status"></td>
+						<?php } else { ?>
+						<td class="status">&#10003;</td>
+						<?php } ?>
+						<td class="action"><a href="" id="<?= $message['id']; ?>" class="open">Open</a> | <a href="" id="<?= $message['id']; ?>" class="reply">Reply</a> | <a href="/queries/delete_msg/<?= $message['id']; ?>">Delete</a></td>
+					</tr>
+
+					<?php } ?>
+				</tbody>
+			</table>	
+			<p class="view_sent_btn"><a class="sent" href="">view sent messsages</a></p>
+		</div>
+		<?php } else { ?>
+
+		<p class="no_msg">Mailbox Empty</p>
+
+		<p class="view_sent_btn"><a class="sent" href="">view sent messsages</a></p>
+
+		<?php } ?>
+	</div>
+
+
+	<div class="sent_mail_container">
+		<?php if($sent_messages != null) { ?>
+		<div class="sent_mail">
+			<table>
+				<thead>
+					<th>From</th>
+					<th>Subject</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					<?php foreach ($sent_messages as $message) { 
+						?>
+					<tr>
+
+						<td><?= $message['alias']; ?></td>
+						<td><?= $message['subject']; ?></td>
+						<td class="action"><a href="" id="<?= $message['id']; ?>" class="open">Open</a> | <a href="/queries/delete_msg/<?= $message['id']; ?>">Delete</a></td>
+					</tr>
+
+					<?php } ?>
+				</tbody>
+			</table>	
+			<p class="view_sent_btn"><a class="received" href="">view messsages</a></p>
+		</div>
+		<?php } else { ?>
+
+		<p class="no_msg">no sent messages</p>
+
+		<p class="view_sent_btn"><a class="received" href="">view messsages</a></p>
+
+		<?php } ?>
+	</div>
+
+	<div id="message">
+		
+	</div>
+
+	<div class="compose">
+		<form action="/queries/sendMail/<?= $id; ?>" method="post">
+			<h1 class="send">Send a Message</h1>
+			<p><input type="text" name="alias" placeholder="To:" class="to"></p>
+			<p><input type="text" name="subject" placeholder="Subject:" class="subject"></p>
+			<textarea type="text" name="text" class="text"></textarea>
+			<p><input type="submit" value="send new message"></p>
+		</form>
+	</div>
 
 
 	<p class="logout button"><a href="/traffic/end">Log me out</a></p>

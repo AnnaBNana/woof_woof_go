@@ -21,7 +21,9 @@ class Queries extends CI_Controller {
 			$info = array(
 				'alias' => $this->input->post('alias'),
 				'email' => $this->input->post('email'),
-				'about' => $this->input->post('about')
+				'about' => $this->input->post('about'),
+				'loc' => $this->input->post('loc'),
+				'avail' => $this->input->post('avail')
 				);
 			
 			$this->Query->edit_user($info, $id);
@@ -91,6 +93,42 @@ class Queries extends CI_Controller {
 	public function deleteProfile() {
 
 	}
+	public function sendMail($id) {
+		// var_dump('in queries controller', $id, $this->input->post());
+		// die();
+		$alias = $this->input->post('alias');
+		$recip_check = $this->Query->get_user_by_alias($alias);
+		if(!empty($recip_check)){
+			$info = array(
+				'subject' => $this->input->post('subject'),
+				'text' => $this->input->post('text'),
+				'recip_id' => $recip_check['id']
+				);
+			$this->Query->send_msg($info, $id);
+			$recip_id = $recip_check['id'];
+			$this->session->set_flashdata('msg_return', 'Message Sent!');
+			redirect("/traffic/profile/" . $recip_id);
+		} else {
+			$this->session->set_flashdata('msg_return', 'this user does not exist');
+			redirect("/traffic/profile/" . $recip_id);
+		}
+	}
+	public function delete_msg($msg_id) {
+		$this->Query->delete_msg($msg_id);
+		$id = $this->session->userdata('id');
+		redirect("/traffic/messages/" . $id);
+	}
+	public function msg_partial($msg_id) {
+		$this->Query->mark_msg_read($msg_id);
+		$data["msg"] = $this->Query->get_msg_by_id($msg_id);
+		$this->load->view("/partials/open_message", $data);
+	}
+	public function reply_partial($msg_id) {
+		$this->Query->mark_msg_read($msg_id);
+		$data["msg"] = $this->Query->get_msg_by_id($msg_id);
+		$this->load->view("/partials/reply_message", $data);
+	}
+
 }
 
  ?>

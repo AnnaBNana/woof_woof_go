@@ -16,7 +16,7 @@ class Traffic extends CI_Controller {
 		$reg = $this->Query->get_user_by_id($id);
 		$pets = $this->Query->get_all_user_pets($id);
 		$reg['pets'] = $pets;
-		$users = $this->Query->get_all_user_img();
+		$users = $this->Query->get_user_imgs_rand($id);
 		$reg['imgs'] = $users;
 		$this->load->view('welcome', $reg);
 	}
@@ -36,10 +36,13 @@ class Traffic extends CI_Controller {
 	}
 	public function browse($id) {
 		$reg = $this->Query->get_user_by_id($id);
+		$reg['user_profiles'] = $this->Query->get_user_imgs_by_date($id);
 		$this->load->view('browse', $reg);
 	}
 	public function messages($id) {
 		$reg = $this->Query->get_user_by_id($id);
+		$reg['sent_messages'] = $this->Query->get_all_sent_messages($id);
+		$reg['messages'] = $this->Query->get_all_users_messages($id);
 		$this->load->view('messages', $reg);
 	}
 	public function profile($id) {

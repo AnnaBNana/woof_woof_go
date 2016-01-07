@@ -13,8 +13,8 @@ class Query extends CI_Model {
 		return $this->db->query("SELECT * FROM users WHERE id = ?", array($id))->row_array();
 	}
 	function edit_user($change_user, $id) {
-		$query = "UPDATE users SET alias = ?, email = ?, about = ?, updated_at = ? WHERE id = ?";
-		$values = array($change_user['alias'], $change_user['email'], $change_user['about'], date("Y-m-d, H:i:s"), $id);
+		$query = "UPDATE users SET alias = ?, email = ?, about = ?, primary_city = ?, availability = ?, updated_at = ? WHERE id = ?";
+		$values = array($change_user['alias'], $change_user['email'], $change_user['about'], $change_user['loc'], $change_user['avail'],date("Y-m-d, H:i:s"), $id);
 		return $this->db->query($query, $values);
 	}
 	function add_pet($new_pet, $id) {
@@ -47,8 +47,36 @@ class Query extends CI_Model {
 		$values = array($user_img['name'], date("Y-m-d, H:i:s"), $pet_id);
 		return $this->db->query($query, $values);
 	}
-	function get_all_user_img() {
-		return $this->db->query("SELECT id, img_name FROM users ORDER BY RAND() LIMIT 5;")->result_array();
+	function get_user_imgs_rand($user_id) {
+		return $this->db->query("SELECT id, img_name FROM users WHERE id != ? ORDER BY RAND() LIMIT 5", array($user_id))->result_array();
+	}
+	function get_user_imgs_by_date($user_id) {
+		return $this->db->query("SELECT id, img_name FROM users WHERE id != ? ORDER BY created_at DESC LIMIT 20", array($user_id))->result_array();
+	}
+	function get_all_users_messages($user_id) {
+		return $this->db->query("SELECT messages.id, messages.subject, messages.text, messages.status, messages.sender_id, messages.recip_id, messages.created_at, users.alias FROM messages LEFT JOIN users ON messages.sender_id=users.id WHERE recip_id = ?", array($user_id))->result_array();
+	}
+	function get_all_sent_messages($user_id) {
+		return $this->db->query("SELECT messages.id, messages.subject, messages.text, messages.status, messages.sender_id, messages.recip_id, messages.created_at, users.alias FROM messages LEFT JOIN users ON messages.sender_id = users.id WHERE sender_id = ?", array($user_id))->result_array();
+	}
+	function get_user_by_alias($alias) {
+		return $this->db->query("SELECT users.id, users.alias FROM users WHERE alias = ?", array($alias))->row_array();
+	}
+	function send_msg($msg_content, $sender_id) {
+		$query = "INSERT INTO messages (subject, text, status, sender_id, recip_id, created_at) VALUES (?, ?, ?, ?, ?, ?)";
+		$values = array($msg_content['subject'], $msg_content['text'], 'unread', $sender_id, $msg_content['recip_id'], date("Y-m-d, H:i:s"));
+		return $this->db->query($query, $values);
+	}
+	function get_msg_by_id($msg_id) {
+		return $this->db->query("SELECT messages.id, messages.subject, messages.text, messages.status, messages.sender_id, messages.recip_id, DATE_FORMAT(messages.created_at,'%W, %M %e, %Y @ %h:%i %p') as created_at, users.alias FROM messages LEFT JOIN users ON messages.sender_id=users.id WHERE messages.id = ?", array($msg_id))->row_array();
+	}
+	function mark_msg_read($msg_id) {
+		$query = "UPDATE messages SET status = ?, updated_at = ? WHERE id = ?";
+		$values = array('read', date("Y-m-d, H:i:s"), $msg_id);
+		return $this->db->query($query, $values);
+	}
+	function delete_msg($msg_id) {
+		return $this->db->query("DELETE FROM messages WHERE id = ?", $msg_id);
 	}
 }
 
