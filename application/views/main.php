@@ -7,7 +7,7 @@
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 	<link rel="stylesheet" type="text/css" href="../assets/style.css">
 	 <script language="javascript" type="text/javascript" src="../assets/map.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsU9iilPcFFDwBg5viGoImP5IGx5LOUJY&libraries=places"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=###&libraries=places"></script>
 	</script>
 
 	<style type="text/css">
@@ -17,6 +17,7 @@
 
 </head>
 <body>
+	<p><a href = "/traffic/tester">tester</a></p>
 	<div class="start button">
 		<a href="/traffic/login">Login or Sign Up</a>
 	</div>

@@ -34,6 +34,8 @@ class Logins extends CI_Controller {
 			$user = $this->Query->get_user_by_email($info['email']);
 			$id = $user['id'];
 			$this->session->set_userdata('id', $id);
+			$login_status = true;
+			$this->session->set_userdata('login_status', $login_status);
 		redirect("/traffic/success/" . $id);
 		}
 		else{
@@ -50,7 +52,8 @@ class Logins extends CI_Controller {
 			$user = $this->Query->get_user_by_email($email);
 			$id = $user['id'];
 			$this->session->set_userdata('id', $id);
-			// var_dump($this->session->all_userdata());
+			$login_status = true;
+			$this->session->set_userdata('login_status', $login_status);
 			redirect('/traffic/success/' . $id);
 		}
 		else{

@@ -7,7 +7,7 @@
 /*front page*/
 .start {
 	text-align: right;
-	margin: 40px 20px 0 0;
+	margin: 40px 0 0 0;
 }
 .subtitle {
 	border-top: 1px solid #D2ED9E;
@@ -278,15 +278,16 @@
 	text-align: center;
 }
 .button a {
-	padding: 14px;
-	color: #A3C563;
-	border: 1px solid #A3C563;
+	padding: 14px 24px;
+	color: #fff;
+	background-color: #A3C563;
 	text-decoration: none;
 	font-size: 1.2em;
 	font-weight: bold;
 	box-sizing: border-box;
-	box-shadow: 4px 4px #F3FAE4;
-	background-color: white;
+	border-radius: 15px 0 0 15px;
+	border-bottom: 4px solid #7A9E35;
+	font-weight: 300;
 }
 .titles {
 	font-family: "fatfrank", sans-serif;
@@ -322,16 +323,20 @@ textarea[type='text'] {
 	resize: none;
 }
 input[type="submit"] {
-	padding: 14px;
-	color: #A3C563;
-	border: 1px solid #A3C563;
-	background-color: #fff;
-	font-size: 1em;
+	border: none;
+	padding: 10px 20px;
+	color: #fff;
+	background-color: #A3C563;
+	text-decoration: none;
+	font-weight: bold;
+	box-sizing: border-box;
+	border-radius: 15px;
+	border-bottom: 4px solid #7A9E35;
+	font-weight: 100;
+	font-size: 0.8em;
 	display: block;
 	margin: 0 auto;
 	outline: none;
-	box-shadow: 4px 4px #F3FAE4;
-	background-color: white;
 }
 form {
 	width: 70%;

@@ -13,12 +13,18 @@ class Traffic extends CI_Controller {
 	}
 	
 	public function success($id) {
-		$reg = $this->Query->get_user_by_id($id);
-		$pets = $this->Query->get_all_user_pets($id);
-		$reg['pets'] = $pets;
-		$users = $this->Query->get_user_imgs_rand($id);
-		$reg['imgs'] = $users;
-		$this->load->view('welcome', $reg);
+		if ($this->session->userdata('login_status') == true ) {
+			$reg = $this->Query->get_user_by_id($id);
+			$pets = $this->Query->get_all_user_pets($id);
+			$reg['pets'] = $pets;
+			$users = $this->Query->get_user_imgs_rand($id);
+			$reg['imgs'] = $users;
+			$this->load->view('welcome', $reg);
+		} else {
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->load->view('login');
+		}
+
 	}
 	public function login() {
 		$this->load->view('login');
@@ -28,31 +34,54 @@ class Traffic extends CI_Controller {
 		redirect('/');
 	}
 	public function edit($id) {
-		$reg = $this->Query->get_user_by_id($id);
-		$reg['msg'] = '';
-		$pets = $this->Query->get_all_user_pets($id);
-		$reg['pets'] = $pets;
-		$this->load->view('edit', $reg);
+		if ($this->session->userdata('login_status') == true ) {
+			$reg = $this->Query->get_user_by_id($id);
+			$reg['msg'] = '';
+			$pets = $this->Query->get_all_user_pets($id);
+			$reg['pets'] = $pets;
+			$this->load->view('edit', $reg);
+		} else {
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->load->view('login');
+		}
 	}
 	public function browse($id) {
-		$reg = $this->Query->get_user_by_id($id);
-		$reg['user_profiles'] = $this->Query->get_user_imgs_by_date($id);
-		$this->load->view('browse', $reg);
+		if ($this->session->userdata('login_status') == true ) {
+			$reg = $this->Query->get_user_by_id($id);
+			$reg['user_profiles'] = $this->Query->get_user_imgs_by_date($id);
+			$this->load->view('browse', $reg);
+		} else {
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->load->view('login');
+		}
 	}
 	public function messages($id) {
-		$reg = $this->Query->get_user_by_id($id);
-		$reg['sent_messages'] = $this->Query->get_all_sent_messages($id);
-		$reg['messages'] = $this->Query->get_all_users_messages($id);
-		$this->load->view('messages', $reg);
+		if ($this->session->userdata('login_status') == true ) {
+			$reg = $this->Query->get_user_by_id($id);
+			$reg['sent_messages'] = $this->Query->get_all_sent_messages($id);
+			$reg['messages'] = $this->Query->get_all_users_messages($id);
+			$this->load->view('messages', $reg);
+		} else {
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->load->view('login');
+		}
 	}
 	public function profile($id) {
-		$reg = $this->Query->get_user_by_id($id);
-		$pets = $this->Query->get_all_user_pets($id);
-		$reg['pets'] = $pets;
-		$this->load->view('profile', $reg);
+		if ($this->session->userdata('login_status') == true ) {
+			$reg = $this->Query->get_user_by_id($id);
+			$pets = $this->Query->get_all_user_pets($id);
+			$reg['pets'] = $pets;
+			$this->load->view('profile', $reg);
+		} else {
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->load->view('login');
+		}
 	}
 	public function map() {
 		$this->load->view('map');
+	}
+	public function tester() {
+		$this->load->view('testmain');
 	}
 }
 
