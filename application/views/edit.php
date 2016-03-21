@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Woof Woof Go!</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="https://use.typekit.net/zzk6kht.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
-	<link rel="stylesheet" type="text/css" href="../../assets/style.css">
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsU9iilPcFFDwBg5viGoImP5IGx5LOUJY&libraries=places"></script>
-	</script>
-	
-</head>
-<body>
-<!-- <div class="bg">
-	<img src="../../assets/bg.jpg">
-</div> -->
+<div class="wrapper">
 	<h1 class="titles">Edit My Info</h1>
 
 	<div class="nav_buttons">
@@ -54,7 +39,7 @@
 		</form>
 
 
-		<?php foreach ($pets as $pet) { ?> 
+		<?php foreach ($pets as $pet) { ?>
 		<form action="/queries/editPet/<?= $pet['id']; ?>/<?= $id ?>" method="post" class="edit_pet">
 			<h2>edit <?= $pet['name']; ?>'s profile:</h2>
 			<p>edit name: <input type="text" name="name" value="<?= $pet['name']; ?>"></p>
@@ -86,10 +71,8 @@
 			<p>pet breed: <input type="text" name="breed"></p>
 			<p><input type="submit" value="submit"></p>
 		</form>
-		
+
 	</div>
 
 	<p class="logout button"><a href="/traffic/end">Log me out</a></p>
-
-</body>
-</html>
+</div>

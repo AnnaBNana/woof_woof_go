@@ -25,18 +25,18 @@ class Queries extends CI_Controller {
 				'loc' => $this->input->post('loc'),
 				'avail' => $this->input->post('avail')
 				);
-			
+
 			$this->Query->edit_user($info, $id);
 			$this->session->set_flashdata('updated', 'Profile Updated Successfully!');
 		redirect("/traffic/edit/" . $id);
 		}
 		else{
 			$this->session->set_flashdata('errors', validation_errors());
-			redirect('/traffic/login');
+			redirect('/traffic/main');
 		}
 	}
 	public function addPet($id) {
-		
+
 		$this->form_validation->set_rules('name', 'Pet Name', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('species', 'Species', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('breed', 'Breed', 'required|trim|xxs_clean');
@@ -48,7 +48,7 @@ class Queries extends CI_Controller {
 				'species' => $this->input->post('species'),
 				'breed' => $this->input->post('breed')
 				);
-			
+
 			$this->Query->add_pet($info, $id);
 			$this->session->set_flashdata('updated', 'Pet added successfully!');
 		redirect("/traffic/edit/" . $id);
@@ -74,7 +74,7 @@ class Queries extends CI_Controller {
 				'breed' => $this->input->post('breed'),
 				'about' => $this->input->post('about')
 				);
-			
+
 			$this->Query->edit_pet($info, $pet_id);
 
 			$this->session->set_flashdata('updated', 'Pet Profile Updated Successfully!');
@@ -127,6 +127,9 @@ class Queries extends CI_Controller {
 		$this->Query->mark_msg_read($msg_id);
 		$data["msg"] = $this->Query->get_msg_by_id($msg_id);
 		$this->load->view("/partials/reply_message", $data);
+	}
+	public function reg_partial() {
+		$this->load->view('/partials/register');
 	}
 
 }

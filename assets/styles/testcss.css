@@ -1,0 +1,111 @@
+/** {
+	color: #fff;
+}*/
+/*background image styling*/
+.content {
+  background: url('../imgs/twodogsplaying.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	height: 100vh;
+}
+/*woof logo styling*/
+.triple_border {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	border: 2px solid #fff;
+	height: 120px;
+	width: 120px;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	box-sizing: border-box;
+}
+.double_border {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	border: 2px solid #fff;
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	box-sizing: border-box;
+}
+.logo {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	border: 2px solid #fff;
+	height: 80px;
+	width: 80px;
+	text-align: center;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 1.2em;
+	box-sizing: border-box;
+	font-family: "museo-sans", sans-serif;
+	color: #fff;
+}
+/*woof woof go title */
+.bigger {
+	position: relative;
+	top: 220px;
+	font-size: 6em;
+	text-shadow: 5px 5px 20px #3b310e;
+}
+/*find a dog park*/
+.park_button {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+}
+/*navbar styling*/
+.nav {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 140px;
+	color: #fff;
+}
+.nav ul li {
+	display: inline-block;
+}
+.nav ul {
+	position: absolute;
+	right: 20px;
+	top: 60px;
+}
+.register_window, .learn_more_window, .login_window {
+	display: none;
+	position: absolute;
+	z-index: 99;
+}
+.shadow {
+	display: none;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 98;
+}
+.err {
+	margin: 0;
+	width: 30%;
+	position: absolute;
+	top: 200px;
+	right: 10%;
+	z-index: 99;
+}
+.wrapper {
+  padding-top: 100px;
+}

@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Woof Woof Go!</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="https://use.typekit.net/zzk6kht.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
-	<link rel="stylesheet" type="text/css" href="../../assets/style.css">
-	 <script language="javascript" type="text/javascript" src="../assets/map.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsU9iilPcFFDwBg5viGoImP5IGx5LOUJY&libraries=places"></script>
-	</script>
-	
-</head>
-<body>
-	
+<div class="wrapper">
+
 	<h1 class="titles"><?= $alias ?></h1>
 	<div class="nav_buttons">
 		<p class="edit button"><a href="/traffic/success/<?= $this->session->userdata('id'); ?>">back to my profile</a><a href="/traffic/messages/<?= $this->session->userdata('id'); ?>">go to my mailbox</a><a href="/traffic/map">view dog park map</a></p>
@@ -52,7 +39,7 @@
 
 	<div class="pets">
 		<h1 class="small_title"> My Pets </h1>
-		<?php 
+		<?php
 		foreach ($pets as $pet) {
 		?>
 			<div class="pet">
@@ -68,7 +55,6 @@
 		<?php } ?>
 	</div>
 
-
 	<p class="logout button"><a href="/traffic/end">Log me out</a></p>
-</body>
-</html>
+
+</div>

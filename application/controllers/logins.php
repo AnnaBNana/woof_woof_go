@@ -9,7 +9,7 @@ class Logins extends CI_Controller {
 	}
 
 	public function index() {
-		$this->load->view('logins');
+		$this->load->view('main');
 	}
 
 	public function register(){
@@ -21,6 +21,8 @@ class Logins extends CI_Controller {
 		$this->form_validation->set_rules('confirm', 'Password Confirmation', 'trim|required');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]|xss_clean');
 
+		$iv = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
+
 		if($this->form_validation->run() === TRUE){
 
 			$info = array(
@@ -29,7 +31,7 @@ class Logins extends CI_Controller {
 				'email' => $this->input->post('email'),
 				'password' => $this->input->post('password')
 				);
-			
+
 			$this->Query->add_user($info);
 			$user = $this->Query->get_user_by_email($info['email']);
 			$id = $user['id'];
@@ -40,7 +42,7 @@ class Logins extends CI_Controller {
 		}
 		else{
 			$this->session->set_flashdata('errors', validation_errors());
-			redirect('/traffic/login');
+			redirect('/traffic/index');
 		}
 	}
 	public function sign_in(){
@@ -58,11 +60,11 @@ class Logins extends CI_Controller {
 		}
 		else{
 			$this->session->set_flashdata('login_error', '<p>Invalid email or password!</p>');
-			redirect('/traffic/login');
+			redirect('/traffic/index');
 		}
 	}
-	
-	
+
+
 }
 
  ?>

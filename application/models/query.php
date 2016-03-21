@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Query extends CI_Model {
 	function get_user_by_email($email) {
@@ -34,10 +34,8 @@ class Query extends CI_Model {
 		return $this->db->query("DELETE FROM pets WHERE id = ?", $pet_id);
 	}
 	function add_user_image($user_img, $id) {
-		// var_dump('this is in the model', $user_img);
-		// die();
-		$query = "UPDATE users SET img_name = ?, updated_at = ? WHERE id = ?";
-		$values = array($user_img['name'], date("Y-m-d, H:i:s"), $id);
+		$query = "UPDATE users SET img_name = ?, thumb_name = ?, updated_at = ? WHERE id = ?";
+		$values = array($user_img['image'], $user_img['thumb'], date("Y-m-d, H:i:s"), $id);
 		return $this->db->query($query, $values);
 	}
 	function add_pet_image($user_img, $pet_id) {

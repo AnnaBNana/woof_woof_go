@@ -1,51 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Woof Woof Go!</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-	<script src="https://use.typekit.net/zzk6kht.js"></script>
-
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
-
-	<link rel="stylesheet" type="text/css" href="../../assets/style.css">
-
-	<script>
-		$(document).ready(function(){
-			$('.open').click(function(){
-				var msg_id = $(this).attr("id");
-				console.log(msg_id);
-				$.get("/queries/msg_partial/" + msg_id, function(res) {
-					$('#message').html(res);
-		        });
-				return false;
-			});
-			$('.reply').click(function(){
-				var msg_id = $(this).attr("id");
-				console.log(msg_id);
-				$.get("/queries/reply_partial/" + msg_id, function(res) {
-					$('#message').html(res);
-		        });
-				return false;
-			});
-			$('.sent').click(function(){
-				$('.received_mail_container').css("display", "none");
-				$('.sent_mail_container').attr("class", "sent_show");
-				return false;
-			});
-			$('.received').click(function(){
-				$('.received_mail_container').css("display", "inline");
-				$('.sent_show').attr("class", "sent_mail_container");
-				return false;
-			});
-
-		});
-	</script>
-	
-</head>
-<body>
-
-
+<div class="wrapper">
 	<h1 class="titles">My Messages</h1>
 	<div class="nav_buttons">
 		<p class="edit button"><a href="/traffic/success/<?= $id; ?>">back to my profile</a><a href="/traffic/map">view dog park map</a></p>
@@ -64,7 +17,7 @@
 					<th>Action</th>
 				</thead>
 				<tbody>
-					<?php foreach ($messages as $message) { 
+					<?php foreach ($messages as $message) {
 						?>
 					<tr>
 						<td><?= $message['alias']; ?></td>
@@ -79,7 +32,7 @@
 
 					<?php } ?>
 				</tbody>
-			</table>	
+			</table>
 			<p class="view_sent_btn"><a class="sent" href="">view sent messsages</a></p>
 		</div>
 		<?php } else { ?>
@@ -102,7 +55,7 @@
 					<th>Action</th>
 				</thead>
 				<tbody>
-					<?php foreach ($sent_messages as $message) { 
+					<?php foreach ($sent_messages as $message) {
 						?>
 					<tr>
 
@@ -113,7 +66,7 @@
 
 					<?php } ?>
 				</tbody>
-			</table>	
+			</table>
 			<p class="view_sent_btn"><a class="received" href="">view messsages</a></p>
 		</div>
 		<?php } else { ?>
@@ -126,7 +79,7 @@
 	</div>
 
 	<div id="message">
-		
+
 	</div>
 
 	<div class="compose">
@@ -139,7 +92,38 @@
 		</form>
 	</div>
 
-
 	<p class="logout button"><a href="/traffic/end">Log me out</a></p>
-</body>
-</html>
+
+</div>
+
+	<script>
+		$(document).ready(function(){
+			$('.open').click(function(){
+				var msg_id = $(this).attr("id");
+				console.log(msg_id);
+				$.get("/queries/msg_partial/" + msg_id, function(res) {
+					$('#message').html(res);
+						});
+				return false;
+			});
+			$('.reply').click(function(){
+				var msg_id = $(this).attr("id");
+				console.log(msg_id);
+				$.get("/queries/reply_partial/" + msg_id, function(res) {
+					$('#message').html(res);
+						});
+				return false;
+			});
+			$('.sent').click(function(){
+				$('.received_mail_container').css("display", "none");
+				$('.sent_mail_container').attr("class", "sent_show");
+				return false;
+			});
+			$('.received').click(function(){
+				$('.received_mail_container').css("display", "inline");
+				$('.sent_show').attr("class", "sent_mail_container");
+				return false;
+			});
+
+		});
+	</script>
