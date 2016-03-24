@@ -66,12 +66,21 @@ $(document).ready(function(){
 		var placeLoc = place.geometry.location;
 		var marker = new google.maps.Marker ({
 			map: map,
-			position: place.geometry.location
+			position: place.geometry.location,
+			icon: {
+        path: fontawesome.markers.TREE,
+        scale: 0.4,
+        strokeWeight: 0.5,
+        strokeColor: '#ffffff',
+        strokeOpacity: 1,
+        fillColor: 'olive',
+        fillOpacity: 1
+	    }
 		});
 
 		google.maps.event.addListener(marker, 'click', function() {
 			console.log(place);
-			infowindow.setContent('<p class="infoWindowText">' + place.name + '</p>');
+			infowindow.setContent('<a class="infoWindowText" href="/traffic/park/' + place.place_id + '">' + place.name + '</a>');
 			infowindow.open(map, this);
 		});
 		return marker;

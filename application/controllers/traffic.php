@@ -129,6 +129,19 @@ class Traffic extends CI_Controller {
 		$this->load->view('map');
 		$this->load->view('footer');
 	}
+	public function park($park_id) {
+		$reg['park_id'] = $park_id;
+		if ($this->session->userdata('login_status') == true  && $id == $this->session->userdata['id']) {
+			$this->load->view('header');
+			$this->load->view('navbar');
+			$this->load->view('park', $reg);
+			$this->load->view('footer');
+		} else {
+			$this->load->view('header');
+			$this->load->view('park', $reg);
+			$this->load->view('footer');
+		}
+	}
 }
 
  ?>

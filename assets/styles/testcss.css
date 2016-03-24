@@ -119,5 +119,9 @@
 }
 .infoWindowText {
   color: olive;
-  padding: 20px;
+  padding: 0 10px;
+  height: auto;
+}
+.id {
+  display: none;
 }
