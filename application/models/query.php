@@ -46,7 +46,7 @@ class Query extends CI_Model {
 		return $this->db->query($query, $values);
 	}
 	function get_user_imgs_rand($user_id) {
-		return $this->db->query("SELECT id, img_name FROM users WHERE id != ? ORDER BY RAND() LIMIT 5", array($user_id))->result_array();
+		return $this->db->query("SELECT id, img_name, alias FROM users WHERE id != ? ORDER BY RAND() LIMIT 10", array($user_id))->result_array();
 	}
 	function get_user_imgs_by_date($user_id) {
 		return $this->db->query("SELECT id, img_name FROM users WHERE id != ? ORDER BY created_at DESC LIMIT 20", array($user_id))->result_array();

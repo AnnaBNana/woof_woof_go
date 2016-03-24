@@ -15,7 +15,7 @@ class Traffic extends CI_Controller {
 	}
 
 	public function success($id) {
-		if ($this->session->userdata('login_status') == true ) {
+		if ($this->session->userdata('login_status') == true && $id == $this->session->userdata['id']) {
 			$reg = $this->Query->get_user_by_id($id);
 			$pets = $this->Query->get_all_user_pets($id);
 			$reg['pets'] = $pets;
@@ -26,7 +26,7 @@ class Traffic extends CI_Controller {
 			$this->load->view('welcome', $reg);
 			$this->load->view('footer');
 		} else {
-			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity</p>");
 			$this->load->view('header');
 			$this->load->view('main');
 			$this->load->view('footer');
@@ -43,7 +43,7 @@ class Traffic extends CI_Controller {
 		redirect('/');
 	}
 	public function edit($id) {
-		if ($this->session->userdata('login_status') == true ) {
+		if ($this->session->userdata('login_status') == true && $id == $this->session->userdata['id']) {
 			$reg = $this->Query->get_user_by_id($id);
 			$reg['msg'] = '';
 			$pets = $this->Query->get_all_user_pets($id);
@@ -53,14 +53,14 @@ class Traffic extends CI_Controller {
 			$this->load->view('edit', $reg);
 			$this->load->view('footer');
 		} else {
-			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity</p>");
 			$this->load->view('header');
 			$this->load->view('main');
 			$this->load->view('footer');
 		}
 	}
 	public function browse($id) {
-		if ($this->session->userdata('login_status') == true ) {
+		if ($this->session->userdata('login_status') == true  && $id == $this->session->userdata['id']) {
 			$reg = $this->Query->get_user_by_id($id);
 			$reg['user_profiles'] = $this->Query->get_user_imgs_by_date($id);
 			$this->load->view('header');
@@ -68,14 +68,14 @@ class Traffic extends CI_Controller {
 			$this->load->view('browse', $reg);
 			$this->load->view('footer');
 		} else {
-			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity</p>");
 			$this->load->view('header');
 			$this->load->view('main');
 			$this->load->view('footer');
 		}
 	}
 	public function messages($id) {
-		if ($this->session->userdata('login_status') == true ) {
+		if ($this->session->userdata('login_status') == true  && $id == $this->session->userdata['id']) {
 			$reg = $this->Query->get_user_by_id($id);
 			$reg['sent_messages'] = $this->Query->get_all_sent_messages($id);
 			$reg['messages'] = $this->Query->get_all_users_messages($id);
@@ -84,14 +84,14 @@ class Traffic extends CI_Controller {
 			$this->load->view('messages', $reg);
 			$this->load->view('footer');
 		} else {
-			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity</p>");
 			$this->load->view('header');
 			$this->load->view('main');
 			$this->load->view('footer');
 		}
 	}
 	public function profile($id) {
-		if ($this->session->userdata('login_status') == true ) {
+		if ($this->session->userdata('login_status') == true) {
 			$reg = $this->Query->get_user_by_id($id);
 			$pets = $this->Query->get_all_user_pets($id);
 			$reg['pets'] = $pets;
@@ -100,21 +100,20 @@ class Traffic extends CI_Controller {
 			$this->load->view('profile', $reg);
 			$this->load->view('footer');
 		} else {
-			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity</p>");
 			$this->load->view('header');
 			$this->load->view('main');
 			$this->load->view('footer');
 		}
 	}
 	public function map($id) {
-		if ($this->session->userdata('login_status') == true ) {
-			$reg = $this->Query->get_user_by_id($id);
+		if ($this->session->userdata('login_status') == true  && $id == $this->session->userdata['id']) {
 			$this->load->view('header');
-			$this->load->view('navbar', $reg);
-			$this->load->view('map', $reg);
+			$this->load->view('navbar');
+			$this->load->view('map');
 			$this->load->view('footer');
 		} else {
-			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity");
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity</p>");
 			$this->load->view('header');
 			$this->load->view('main');
 			$this->load->view('footer');

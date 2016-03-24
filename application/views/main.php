@@ -1,4 +1,4 @@
-<div class="content">
+<div class="main_bg">
 
 	<!-- navigation -->
 	<div class="nav">
@@ -109,7 +109,7 @@
 	<!-- site splash title -->
 	<div class="ui center aligned container">
 		<div class="bigger">
-			<p class="ui header inverted"> WOOF WOOF GO </p>
+			<p class="ui header inverted"> WOOF WOOF GO!</p>
 		</div>
 	</div>
 	<!-- link to map -->

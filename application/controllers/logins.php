@@ -5,6 +5,8 @@ class Logins extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Query');
 		$this->load->library('form_validation');
+		$this->load->library('phpass');
+
 		// $this->output->enable_profiler(TRUE);
 	}
 
@@ -21,7 +23,9 @@ class Logins extends CI_Controller {
 		$this->form_validation->set_rules('confirm', 'Password Confirmation', 'trim|required');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]|xss_clean');
 
-		$iv = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
+		$password = $this->input->post('password');
+
+		$hashed = $this->phpass->hash($password);
 
 		if($this->form_validation->run() === TRUE){
 
@@ -29,7 +33,7 @@ class Logins extends CI_Controller {
 				'name' => $this->input->post('name'),
 				'alias' => $this->input->post('alias'),
 				'email' => $this->input->post('email'),
-				'password' => $this->input->post('password')
+				'password' => $hashed
 				);
 
 			$this->Query->add_user($info);
@@ -47,10 +51,11 @@ class Logins extends CI_Controller {
 	}
 	public function sign_in(){
 		$email = $this->input->post('email');
-		$password = md5($this->input->post('password'));
+		$password = $this->input->post('password');
 		$login_check = $this->Query->get_user_by_email($email);
-		if(!empty($login_check) && $login_check['password'] == $password){
+		$hashed = $login_check['password'];
 
+		if(!empty($login_check) && $this->phpass->check($password, $hashed)){
 			$user = $this->Query->get_user_by_email($email);
 			$id = $user['id'];
 			$this->session->set_userdata('id', $id);

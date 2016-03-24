@@ -1,16 +1,15 @@
-
 $(document).ready(function(){
 
-	var map; 
+	var map;
 
 	var request;
 	var service;
 	var markers = [];
 	var center;
-	
+
 
 	function initialize() {
-		
+
 		if (navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(function(position) {
 		var pos = {
@@ -64,14 +63,15 @@ $(document).ready(function(){
 	}
 
 	function createMarker(place) {
-		var placeLoc = place.geometry.location; 
+		var placeLoc = place.geometry.location;
 		var marker = new google.maps.Marker ({
 			map: map,
 			position: place.geometry.location
 		});
 
 		google.maps.event.addListener(marker, 'click', function() {
-			infowindow.setContent(place.name);
+			console.log(place);
+			infowindow.setContent('<p class="infoWindowText">' + place.name + '</p>');
 			infowindow.open(map, this);
 		});
 		return marker;
