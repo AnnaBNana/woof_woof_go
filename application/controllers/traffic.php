@@ -59,6 +59,25 @@ class Traffic extends CI_Controller {
 			$this->load->view('footer');
 		}
 	}
+
+	public function edit_pet($id) {
+		if ($this->session->userdata('login_status') == true && $id == $this->session->userdata['id']) {
+			$reg = $this->Query->get_user_by_id($id);
+			$reg['msg'] = '';
+			$pets = $this->Query->get_all_user_pets($id);
+			$reg['pets'] = $pets;
+			$this->load->view('header');
+			$this->load->view('navbar', $reg);
+			$this->load->view('editpet', $reg);
+			$this->load->view('footer');
+		} else {
+			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity</p>");
+			$this->load->view('header');
+			$this->load->view('main');
+			$this->load->view('footer');
+		}
+	}
+
 	public function browse($id) {
 		if ($this->session->userdata('login_status') == true  && $id == $this->session->userdata['id']) {
 			$reg = $this->Query->get_user_by_id($id);
@@ -108,9 +127,11 @@ class Traffic extends CI_Controller {
 	}
 	public function map($id) {
 		if ($this->session->userdata('login_status') == true  && $id == $this->session->userdata['id']) {
+			//variable enables us to know whether user is navigating from front page or from inside of profile.  if we use session logged in as indicator, sometimes a user will be logged in, but coming from front page, and buttons will display incorrectly
+			$reg['loc'] = "private";
 			$this->load->view('header');
 			$this->load->view('navbar');
-			$this->load->view('map');
+			$this->load->view('map', $reg);
 			$this->load->view('footer');
 		} else {
 			$this->session->set_flashdata('login_error', "<p>you have been logged out due to inactivity</p>");
@@ -119,19 +140,16 @@ class Traffic extends CI_Controller {
 			$this->load->view('footer');
 		}
 	}
-	public function tester() {
-		$this->load->view('header');
-		$this->load->view('main');
-		$this->load->view('footer');
-	}
 	public function logged_out_map() {
+		$reg['loc'] = 'public';
 		$this->load->view('header');
-		$this->load->view('map');
+		$this->load->view('map', $reg);
 		$this->load->view('footer');
 	}
 	public function park($park_id) {
 		$reg['park_id'] = $park_id;
-		if ($this->session->userdata('login_status') == true  && $id == $this->session->userdata['id']) {
+		if ($this->session->userdata('login_status') == true) {
+			$reg['id'] = $this->session->userdata['id'];
 			$this->load->view('header');
 			$this->load->view('navbar');
 			$this->load->view('park', $reg);

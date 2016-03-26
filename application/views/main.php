@@ -107,7 +107,7 @@
 		</div>
 	</div>
 	<!-- site splash title -->
-	<div class="ui center aligned container">
+	<div class="ui center aligned container woof">
 		<div class="bigger">
 			<p class="ui header inverted"> WOOF WOOF GO!</p>
 		</div>

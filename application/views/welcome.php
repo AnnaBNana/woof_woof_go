@@ -1,8 +1,8 @@
 <div class="wrapper">
 
 	<div class="ui padded grid">
-		<div class="three wide column">
-			<div class="ui very padded inverted center aligned segment">
+		<div class="four wide column">
+			<div class="ui padded inverted center aligned segment">
 					<h1 class="ui olive inverted header"><?= $alias; ?> </h1>
 					<div class="ui inverted divider"></div>
 					<?php if($img_name != null) { ?>
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 
-			<div class="ten wide column">
+			<div class="eight wide column">
 				<div class="ui very padded raised center aligned olive segment">
 					<?php if($pets != null) { ?>
 							<h1 class="ui olive header">Browse other Users:</h1>
@@ -75,8 +75,8 @@
 			</div>
 			</div>
 
-			<div class="three wide column">
-				<div class="ui very padded inverted segment">
+			<div class="four wide column">
+				<div class="ui padded inverted segment">
 					<h1 class="ui center aligned olive inverted header"> My Pets </h1>
 					<div class="ui inverted divider"></div>
 					<?php
@@ -102,18 +102,14 @@
 						<p><a href="/traffic/edit/<?= $id; ?>">add a pet</a> to view other users!</p>
 					<?php } ?>
 						<div class="ui center aligned inverted segment">
-							<a  href="/traffic/edit/<?= $this->session->userdata['id']; ?>">
+							<a  href="/traffic/edit_pet/<?= $this->session->userdata['id']; ?>">
 								<button class="ui inverted olive centered right labeled icon button">
-						    Edit My Pet's Profile<i class="write icon"></i>
+						    Edit or Add Pets<i class="write icon"></i>
 								</button>
 						  </a>
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="ui centered grid">
-				<a href="/traffic/end"><button class="ui olive button">Log me out</button></a>
 			</div>
 
 	</div>

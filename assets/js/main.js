@@ -1,14 +1,14 @@
 $(document).ready(function() {
-
+	var left_placement = (window.innerWidth/2) - 150;
 	//handels registration click event
 	$('.reg').click(function(e) {
+		console.log(e);
 		// box placed based on click x, y coords
-		var x = e.pageX - 350;
-		var y = e.pageY;
+
 		//cues background shadow div
 		$('.shadow').transition('fade', '2000ms');
 		//sets position of form window
-		$('.register_window').css({top: y + "px", left: x + "px"});
+		$('.register_window').css({top:  "20px", left: left_placement + "px"});
 		//cues transition animation fo rreg form
 		$('.register_window').transition('fly up');
 
@@ -23,10 +23,8 @@ $(document).ready(function() {
 
 	//same method for click of learn button
 	$('.lrn').click(function(e) {
-		var x = e.pageX - 500;
-		var y = e.pageY;
 		$('.shadow').transition('fade', '2000ms');
-		$('.learn_more_window').css({top: y + "px", left: x + "px"});
+		$('.learn_more_window').css({top: "20px", left: left_placement + "px"});
 		$('.learn_more_window').transition('fly up');
 	})
 
@@ -37,10 +35,8 @@ $(document).ready(function() {
 
 	//same method for click of login button
 	$('.log').click(function(e) {
-		var x = e.pageX - 500;
-		var y = e.pageY;
 		$('.shadow').transition('fade', '2000ms');
-		$('.login_window').css({top: y + "px", left: x + "px"});
+		$('.login_window').css({top: "20px", left: left_placement + "px"});
 		$('.login_window').transition('fly up');
 	})
 	$('.close_log').click(function() {
@@ -67,6 +63,19 @@ $(document).ready(function() {
 			$('.login_window').transition('fly down');
 		}
 		$('.shadow').transition('fade', '800ms');
+	})
+
+	$('.woof').transition({
+		animation: 'fade in',
+		duration: 1000,
+		onComplete: function() {
+			$(this).transition('tada');
+		}
+	})
+
+	$('.nav, .park_finder').transition({
+		animation: 'fade in',
+		duration: 1000
 	})
 
 });

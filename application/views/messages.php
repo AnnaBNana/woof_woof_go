@@ -1,9 +1,5 @@
 <div class="wrapper">
 	<h1 class="titles">My Messages</h1>
-	<div class="nav_buttons">
-		<p class="edit button"><a href="/traffic/success/<?= $id; ?>">back to my profile</a><a href="/traffic/map">view dog park map</a></p>
-	</div>
-
 	<div class="flash"><?= $this->session->flashdata('msg_return'); ?></div>
 
 	<div class="received_mail_container">
