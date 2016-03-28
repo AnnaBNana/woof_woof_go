@@ -53,15 +53,20 @@ class Logins extends CI_Controller {
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		$login_check = $this->Query->get_user_by_email($email);
-		$hashed = $login_check['password'];
 
-		if(!empty($login_check) && $this->phpass->check($password, $hashed)){
-			$user = $this->Query->get_user_by_email($email);
-			$id = $user['id'];
-			$this->session->set_userdata('id', $id);
-			$login_status = true;
-			$this->session->set_userdata('login_status', $login_status);
-			redirect('/traffic/success/' . $id);
+		if(!empty($login_check) ){
+			$hashed = $login_check['password'];
+			if ($this->phpass->check($password, $hashed)) {
+				$user = $this->Query->get_user_by_email($email);
+				$id = $user['id'];
+				$this->session->set_userdata('id', $id);
+				$login_status = true;
+				$this->session->set_userdata('login_status', $login_status);
+				redirect('/traffic/success/' . $id);
+			} else {
+				$this->session->set_flashdata('login_error', '<p>Invalid email or password!</p>');
+				redirect('/traffic/index');
+			}
 		}
 		else{
 			$this->session->set_flashdata('login_error', '<p>Invalid email or password!</p>');

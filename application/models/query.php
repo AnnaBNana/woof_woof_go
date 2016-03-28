@@ -13,8 +13,8 @@ class Query extends CI_Model {
 		return $this->db->query("SELECT * FROM users WHERE id = ?", array($id))->row_array();
 	}
 	function edit_user($change_user, $id) {
-		$query = "UPDATE users SET alias = ?, email = ?, about = ?, primary_city = ?, availability = ?, updated_at = ? WHERE id = ?";
-		$values = array($change_user['alias'], $change_user['email'], $change_user['about'], $change_user['loc'], $change_user['avail'],date("Y-m-d, H:i:s"), $id);
+		$query = "UPDATE users SET alias = ?, email = ?, about = ?, primary_city = ?, updated_at = ? WHERE id = ?";
+		$values = array($change_user['alias'], $change_user['email'], $change_user['about'], $change_user['loc'], date("Y-m-d, H:i:s"), $id);
 		return $this->db->query($query, $values);
 	}
 	function add_pet($new_pet, $id) {
@@ -25,9 +25,14 @@ class Query extends CI_Model {
 	function get_all_user_pets($user_id) {
 		return $this->db->query("SELECT * FROM pets WHERE user_id = ?", array($user_id))->result_array();
 	}
-	function edit_pet($change_pet, $pet_id) {
-		$query = "UPDATE pets SET name = ?, species = ?, breed = ?, about = ?, updated_at = ? WHERE id = ?";
-		$values = array($change_pet['name'], $change_pet['species'], $change_pet['breed'], $change_pet['about'], date("Y-m-d, H:i:s"), $pet_id);
+	function edit_pet($change_pet, $pet_id, $id) {
+		$query = "UPDATE pets SET name = ?, species = ?, breed = ?, about = ?, updated_at = ? WHERE id = ? AND user_id = ?";
+		$values = array($change_pet['name'], $change_pet['species'], $change_pet['breed'], $change_pet['about'], date("Y-m-d, H:i:s"), $pet_id, $id);
+		return $this->db->query($query, $values);
+	}
+	function pet_details($play_info, $pet_id, $id) {
+		$query = "UPDATE pets SET gender = ?, play_style = ?, social_pref = ?, weight = ?, updated_at = ? WHERE id = ? AND user_id = ?";
+		$values = array($play_info['gender'], $play_info['play_style'], $play_info['social_pref'], $play_info['weight'], date("Y-m-d, H:i:s"), $pet_id, $id);
 		return $this->db->query($query, $values);
 	}
 	function delete_pet($pet_id) {
@@ -39,10 +44,10 @@ class Query extends CI_Model {
 		return $this->db->query($query, $values);
 	}
 	function add_pet_image($user_img, $pet_id) {
-		// var_dump('this is in the model', $user_img);
+		// var_dump('this is in the model', $user_img, $pet_id);
 		// die();
-		$query = "UPDATE pets SET img_name = ?, updated_at = ? WHERE id = ?";
-		$values = array($user_img['name'], date("Y-m-d, H:i:s"), $pet_id);
+		$query = "UPDATE pets SET img_name = ?, thumb_name = ?, updated_at = ? WHERE id = ?";
+		$values = array($user_img['image'], $user_img['thumb'], date("Y-m-d, H:i:s"), $pet_id);
 		return $this->db->query($query, $values);
 	}
 	function get_user_imgs_rand($user_id) {

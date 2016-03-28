@@ -22,17 +22,45 @@ class Queries extends CI_Controller {
 				'alias' => $this->input->post('alias'),
 				'email' => $this->input->post('email'),
 				'about' => $this->input->post('about'),
-				'loc' => $this->input->post('loc'),
-				'avail' => $this->input->post('avail')
+				'loc' => $this->input->post('loc')
 				);
 
 			$this->Query->edit_user($info, $id);
 			$this->session->set_flashdata('updated', 'Profile Updated Successfully!');
-		redirect("/traffic/edit/" . $id);
+			redirect("/traffic/edit/" . $id);
 		}
 		else{
 			$this->session->set_flashdata('errors', validation_errors());
-			redirect('/traffic/main');
+			redirect('/traffic/edit/' . $id);
+		}
+	}
+	public function schedule($id) {
+		$this->form_validation->set_rules('mon', 'Monday', 'trim|xss_clean');
+		$this->form_validation->set_rules('tues', 'Tuesday', 'trim|xss_clean');
+		$this->form_validation->set_rules('weds', 'Wednesday', 'trim|xss_clean');
+		$this->form_validation->set_rules('thurs', 'Thursday', 'trim|xss_clean');
+		$this->form_validation->set_rules('fri', 'Friday', 'trim|xss_clean');
+		$this->form_validation->set_rules('sat', 'Saturday', 'trim|xss_clean');
+		$this->form_validation->set_rules('sun', 'Sunday', 'trim|xss_clean');
+		$this->form_validation->set_rules('notes', 'Notes', 'trim|xss_clean');
+
+		if($this->form_validation->run() === TRUE) {
+			$info = array(
+				'monday' => $this->input->post('mon'),
+				'tuesday' => $this->input->post('tues'),
+				'wednesday' => $this->input->post('weds'),
+				'thursday' => $this->input->post('thurs'),
+				'friday' => $this->input->post('fri'),
+				'saturday' => $this->input->post('sat'),
+				'sunday' => $this->input->post('sun'),
+				'notes' => $this->input->post('notes'),
+			);
+			$this->Query->user_schedule($info, $id);
+			$this->session->set_flashdata('updated', 'Schedule Updated Successfully!');
+			redirect("/traffic/edit/" . $id);
+		} else {
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect('/traffic/edit/' . $id);
 		}
 	}
 	public function addPet($id) {
@@ -75,12 +103,46 @@ class Queries extends CI_Controller {
 				'about' => $this->input->post('about')
 				);
 
-			$this->Query->edit_pet($info, $pet_id);
+			$this->Query->edit_pet($info, $pet_id, $id);
 
 			$this->session->set_flashdata('updated', 'Pet Profile Updated Successfully!');
 		redirect("/traffic/edit/" . $id);
 		}
 		else{
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect("/traffic/edit/" . $id);
+		}
+	}
+	public function petDetails($pet_id, $id) {
+
+		$this->form_validation->set_rules('gender', 'I am', 'require|trim|xss_clean');
+		$this->form_validation->set_rules('play_style', 'I play', 'require|trim|xss_clean');
+		$this->form_validation->set_rules('social_pref', 'I am good with', 'require|trim|xss_clean');
+		$this->form_validation->set_rules('weight', 'My weight', 'require|trim|xss_clean|numeric');
+
+		if($this->form_validation->run() === TRUE) {
+			$unit = $this->input->post('unit');
+			$weight_raw = $this->input->post('weight');
+			if($unit === 'lbs') {
+				$weight = floatval($weight_raw);
+			}
+			else if ($unit == 'kg') {
+				$weight = floatval($weight_raw);
+				$weight = $weight/2.2;
+				$weight = round($weight, 2, PHP_ROUND_HALF_UP);
+			}
+			$info = array(
+				'gender' => $this->input->post('gender'),
+				'play_style' => $this->input->post('play_style'),
+				'social_pref' => $this->input->post('social_pref'),
+				'weight' => $weight
+			);
+
+			$this->Query->pet_details($info, $pet_id, $id);
+
+			$this->session->set_flashdata('updated', 'Pet play preferences updated successfully!');
+			redirect("/traffic/edit/" . $id);
+		} else {
 			$this->session->set_flashdata('errors', validation_errors());
 			redirect("/traffic/edit/" . $id);
 		}

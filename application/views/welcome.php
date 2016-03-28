@@ -1,10 +1,12 @@
 <div class="wrapper">
 
-	<div class="ui padded grid">
+	<!-- user div -->
+	<div class="ui stackable padded grid">
 		<div class="four wide column">
-			<div class="ui padded inverted center aligned segment">
-					<h1 class="ui olive inverted header"><?= $alias; ?> </h1>
+			<div class="ui padded inverted segment">
+					<h1 class="ui center aligned olive inverted header"><?= $alias; ?> </h1>
 					<div class="ui inverted divider"></div>
+					<!-- there are several conditional here that make suggestions to add more profile info if not added upon registration -->
 					<?php if($img_name != null) { ?>
 						<p class="profile_pic"><img class="ui centered circular image" src="../../uploads/<?= $img_name; ?>"></p>
 					<?php } else { ?>
@@ -22,17 +24,13 @@
 					<?php } else { ?>
 						<p></p>
 					<?php } ?>
-					<?php if($availability != null) { ?>
-					<h3 class="small_title">My availability:</h3>
-						<p><?= $availability; ?></p>
-					<?php } else { ?>
-						<p></p>
-					<?php } ?>
-				  <a  href="/traffic/edit/<?= $this->session->userdata['id']; ?>">
-						<button class="ui inverted olive right labeled icon button">
-				    Edit My Profile  <i class="write icon"></i>
-					</button>
-				  </a>
+					<div class="ui center aligned inverted segment">
+					  <a  href="/traffic/edit/<?= $this->session->userdata['id']; ?>">
+							<button class="ui inverted olive centered right labeled icon button">
+					    Edit My Profile  <i class="write icon"></i>
+							</button>
+					  </a>
+					</div>
 				</div>
 			</div>
 
@@ -41,7 +39,7 @@
 					<?php if($pets != null) { ?>
 							<h1 class="ui olive header">Browse other Users:</h1>
 							<div class="ui divider"></div>
-							<div class="ui vertically padded four column grid">
+							<div class="ui stackable vertically padded four column grid">
 								<?php
 								foreach ($imgs as $img) {
 									if($img['img_name'] != null) { ?>
@@ -66,7 +64,7 @@
 								}
 								?>
 							</div>
-							<div class="ui sixteen column centered grid">
+							<div class="ui stackable sixteen column centered grid">
 								<div class="sixteen column centered row">
 									<a href="/traffic/browse/<?= $id; ?>"><button class="ui olive button">view more users</button></a>
 								</div>
@@ -103,7 +101,7 @@
 					<?php } ?>
 						<div class="ui center aligned inverted segment">
 							<a  href="/traffic/edit_pet/<?= $this->session->userdata['id']; ?>">
-								<button class="ui inverted olive centered right labeled icon button">
+								<button class="ui inverted olive right labeled icon button">
 						    Edit or Add Pets<i class="write icon"></i>
 								</button>
 						  </a>

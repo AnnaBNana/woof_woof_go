@@ -18,10 +18,10 @@
 	</div>
 
 
-	<?php if($this->session->flashdata('errors') != null || $this->session->flashdata('login_error')) {?>
+	<?php if($this->session->flashdata('errors') || $this->session->flashdata('login_error')) {?>
 		<div class="err">
-			<div class="ui violet message">
-				<i class="close icon"></i>
+			<div class="ui violet message error">
+				<i class="close icon error_close"></i>
 				<div class="header">
 					There were some errors with your submission:
 				</div>

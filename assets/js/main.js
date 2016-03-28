@@ -9,7 +9,7 @@ $(document).ready(function() {
 		$('.shadow').transition('fade', '2000ms');
 		//sets position of form window
 		$('.register_window').css({top:  "20px", left: left_placement + "px"});
-		//cues transition animation fo rreg form
+		//cues transition animation fo reg form
 		$('.register_window').transition('fly up');
 
 	});
@@ -43,13 +43,9 @@ $(document).ready(function() {
 		$('.login_window').transition('fly down');
 		$('.shadow').transition('fade', '800ms');
 	});
-	$('.message .close')
-  .on('click', function() {
-    $(this)
-      .closest('.message')
-      .transition('fade')
-    ;
-  });
+	$('.error_close').click(function() {
+		location.reload();
+	});
 
 	//handles dismissing any of the windows if they are open upon click of the shadow background
 	$('.shadow').click(function() {
@@ -67,10 +63,10 @@ $(document).ready(function() {
 
 	$('.woof').transition({
 		animation: 'fade in',
-		duration: 1000,
-		onComplete: function() {
-			$(this).transition('tada');
-		}
+		duration: 1000
+		// onComplete: function() {
+		// 	$(this).transition('tada');
+		// }
 	})
 
 	$('.nav, .park_finder').transition({

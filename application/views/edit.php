@@ -1,19 +1,25 @@
 <div class="wrapper">
-	<p></p>
+
+	<?php if($this->session->flashdata('updated') || $this->session->flashdata('errors')) {?>
+		<div class="ui stackable padded center aligned grid">
+			<div class="ten wide column">
+				<div class="ui compact olive message">
+					<p><?= $this->session->flashdata('updated'); ?></p>
+					<p><?= $this->session->flashdata('errors'); ?></p>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+
 	<h1 class="ui center aligned olive header">
 		Edit My Info
 	</h1>
 
-	<div class="flash"><?= $this->session->flashdata('updated'); ?></div>
-	<p class="upload_msg"><?php echo $msg; ?></p>
-
-	<div class="ui padded grid">
+	<div class="ui stackable padded grid">
 
 		<div class="eight wide column">
 			<div class="ui inverted segment form">
 				<form action="/queries/editMe/<?= $id; ?>" method="post">
-					<h2 class="ui center aligned olive header">edit my info</h2>
-					<div class="ui inverted divider"></div>
 					<p>change my alias: <input type="text" name="alias" value="<?= $alias; ?>"></p>
 					<p>change my email: <input type="text" name="email" value="<?= $email; ?>"></p>
 					<p>my location: <input type="text" name="loc" value="<?= $primary_city; ?>"></p>
@@ -21,6 +27,7 @@
 					<p><input class="ui inverted olive button" type="submit" value="update my info"></p>
 				</form>
 			</div>
+
 			<div class="ui center aligned inverted segment form">
 				<?php echo form_open_multipart("/upload/do_upload/" . $id);?>
 					<h2 class="ui olive center aligned header">upload a photo of yourself</h2>
@@ -36,7 +43,7 @@
 		<div class="eight wide column">
 
 			<div class="ui inverted segment padded form">
-				<form action="traffic/schedule" method="post">
+				<form action="/queries/schedule/<?= $id; ?>" method="post">
 					<h2 class="ui center aligned olive header">times I'm available to meet:</h2>
 					<div class="ui inverted divider"></div>
 					<p>Monday:<input type="text" name="mon" placeholder="ex: all day"></p>
@@ -46,13 +53,16 @@
 					<p>Friday:<input type="text" name="fri" placeholder="ex: all day"></p>
 					<p>Saturday:<input type="text" name="sat" placeholder="ex: all day"></p>
 					<p>Sunday:<input type="text" name="sun" placeholder="ex: all day"></p>
+					<p>Notes: <textarea name="notes" placeholder="notes on my schedule..."></textarea></p>
 					<p><input class="ui inverted olive button" type="submit" name="submit" value="add times"></p>
 				</form>
 			</div>
 		</div>
 	</div>
 
-	<div class="ui padded grid">
+	<div class="ui inverted divider"></div>
+
+	<div class="ui stackable padded grid">
 		<div class="sixteen wide column">
 			<div class="ui padded inverted segment form">
 				<form action="/queries/editPwd/<?= $id ?>" method="post" class="change_pwd">
