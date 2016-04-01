@@ -106,7 +106,7 @@ $(document).ready(function(){
 	//retrieves geocode information when user submits zip code,
 	//uses lat lng from retrieved data as lat lng parameter for new map
 	function useZip(zip) {
-		$.get('https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:' + zip + '&country:US&key=AIzaSyDsU9iilPcFFDwBg5viGoImP5IGx5LOUJY', function(res) {
+		$.get('https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:' + zip + '&country:US&key=', function(res) {
 			newMap(res.results[0].geometry.location);
 		}, 'json');
 	}
