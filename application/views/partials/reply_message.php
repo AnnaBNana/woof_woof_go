@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-	
-</head>
-<body>
-
   <div class="reply_form_vis">
-
-  <form action="/queries/sendMail/<?= $this->session->userdata('id') ?>" method="post">
-    <p>reply to <?= $msg['alias'] ?></p>
-    <p class="reply_labels">To: </p><p> <input type="text" value="<?= $msg['alias'] ?>" name="alias"></p>
-    <p class="reply_labels">Subject: </p><p> <input type="text" value="Re: <?= $msg['subject'] ?>" name="subject"></p>
-    <p><textarea type="text" name="text"></textarea></p>
-    <p><input type="submit" value="send reply"></p>
-  </form>
-
+		<div class="ui padded centered grid">
+			<div class="eight wide column">
+				<div class="ui inverted segment form">
+				  <form action="/queries/sendMail/<?= $this->session->userdata('id') ?>" method="post">
+				    <h3 class="ui center aligned olive header">Reply to <a href="/traffic/profile/<?= $msg['sender_id'] ?>"><?= $msg['alias'] ?></a></h3>
+						<div class="ui inverted horizontal divider"><i class="olive send outline icon"></i></div>
+				    <p class="reply_labels">To: </p><p> <input type="text" value="<?= $msg['alias'] ?>" name="alias"></p>
+				    <p class="reply_labels">Subject: </p><p> <input type="text" value="Re: <?= $msg['subject'] ?>" name="subject"></p>
+				    <p><textarea type="text" name="text"></textarea></p>
+				    <p><input class="ui olive button" type="submit" value="send reply"></p>
+				  </form>
+				</div>
+			</div>
+		</div>
   </div>
-
-</body>
-</html>

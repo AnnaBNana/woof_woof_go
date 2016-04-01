@@ -106,7 +106,7 @@ $(document).ready(function(){
 	//retrieves geocode information when user submits zip code,
 	//uses lat lng from retrieved data as lat lng parameter for new map
 	function useZip(zip) {
-		$.get('https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:' + zip + '&country:US&key=###', function(res) {
+		$.get('https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:' + zip + '&country:US&key=', function(res) {
 			newMap(res.results[0].geometry.location);
 		}, 'json');
 	}
@@ -184,10 +184,41 @@ $(document).ready(function(){
 
 		google.maps.event.addListener(marker, 'click', function() {
 			console.log(place);
-			infowindow.setContent('<a class="infoWindowText" href="/traffic/park/' + place.place_id + '">' + place.name + '</a>');
-			console.log(place.place_id);
+			service.getDetails({
+				placeId: place.place_id
+			}, function(place_return, status) {
+				console.log(place_return);
+				//google maps does not return object with city and state properties.
+				//function loops through address data to pull out city and state in order to use it query yelp API
+				function parseAddress(loc) {
+					for (var i = 0; i < loc.length; i++) {
+						for(var j = 0; j < loc[i].types.length; j++) {
+							if (loc[i].types[j] == "locality") {
+								var locality = loc[i].long_name;
+							}
+							if (loc[i].types[j] == "administrative_area_level_1") {
+								var state = loc[i].short_name;
+							}
+						}
+					}
+					locality = locality.replace(/ /g, "_");
+					var location = locality + "_" + state;
+					return location;
+				}
+				var loc = place_return.address_components;
+				var location = parseAddress(loc);
+				var name = place.name.replace(/ /g, "_");
+				// console.log(typeof place.place_id);
+				// var uri = "/traffic/park/" + place.place_id + "/" + name + "/" + location;
+				// console.log(uri);
+				infowindow.setContent('<a class="infoWindowText" href="/yelp/park/' + place.place_id + '/' + name + '/' + location + '">' + place.name + '</a>');
+				// console.log(place.place_id);
+
+			});
 			infowindow.open(map, this);
 		});
+
+
 
 		return marker;
 	}

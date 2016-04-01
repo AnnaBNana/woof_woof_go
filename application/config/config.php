@@ -359,6 +359,15 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+/*
+|----------------------------------------------------------------------------
+|PHPass config settings
+|----------------------------------------------------------------------------
+*/
+
+$config['iteration_count_log2'] = 8;
+$config['portable_hashes']      = FALSE;
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -149,3 +149,15 @@
   top: 80vh;
   left: 0;
 }
+.sent_mail_container {
+  display: none;
+}
+.reply_form {
+  display: none;
+}
+#address {
+  display: none;
+}
+.website {
+  overflow-wrap: break-word;
+}

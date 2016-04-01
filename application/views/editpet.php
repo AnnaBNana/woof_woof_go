@@ -11,6 +11,8 @@
     </div>
   <?php } ?>
 
+  <?php if ($pets != null ) { ?>
+
   <?php foreach ($pets as $pet) { ?>
   <h1 class="ui center aligned olive header">Edit <?= $pet['name']; ?>'s Profile:</h1>
 
@@ -111,6 +113,8 @@
     </div>
 
   </div>
+
+  <?php } ?>
 
   <div class="ui inverted divider"></div>
 

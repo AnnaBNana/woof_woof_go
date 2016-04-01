@@ -79,11 +79,11 @@ class Queries extends CI_Controller {
 
 			$this->Query->add_pet($info, $id);
 			$this->session->set_flashdata('updated', 'Pet added successfully!');
-		redirect("/traffic/edit/" . $id);
+		redirect("/traffic/edit_pet/" . $id);
 		}
 		else{
 			$this->session->set_flashdata('errors', validation_errors());
-			redirect("/traffic/edit/" . $id);
+			redirect("/traffic/edit_pet/" . $id);
 		}
 	}
 	public function editPet($pet_id, $id) {
@@ -106,11 +106,11 @@ class Queries extends CI_Controller {
 			$this->Query->edit_pet($info, $pet_id, $id);
 
 			$this->session->set_flashdata('updated', 'Pet Profile Updated Successfully!');
-		redirect("/traffic/edit/" . $id);
+		redirect("/traffic/edit_pet/" . $id);
 		}
 		else{
 			$this->session->set_flashdata('errors', validation_errors());
-			redirect("/traffic/edit/" . $id);
+			redirect("/traffic/edit_pet/" . $id);
 		}
 	}
 	public function petDetails($pet_id, $id) {
@@ -150,7 +150,7 @@ class Queries extends CI_Controller {
 	public function deletePet($pet_id, $id) {
 		$this->Query->delete_pet($pet_id);
 		$this->session->set_flashdata('updated', 'Pet Profile Deleted.');
-		redirect("/traffic/edit/" . $id);
+		redirect("/traffic/edit_pet/" . $id);
 	}
 	public function deleteProfile() {
 

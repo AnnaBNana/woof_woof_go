@@ -46,14 +46,54 @@
 				<form action="/queries/schedule/<?= $id; ?>" method="post">
 					<h2 class="ui center aligned olive header">times I'm available to meet:</h2>
 					<div class="ui inverted divider"></div>
-					<p>Monday:<input type="text" name="mon" placeholder="ex: all day"></p>
-					<p>Tuesday:<input type="text" name="tues" placeholder="ex: all day"></p>
-					<p>Wednesday:<input type="text" name="weds" placeholder="ex: all day"></p>
-					<p>Thursday:<input type="text" name="thurs" placeholder="ex: all day"></p>
-					<p>Friday:<input type="text" name="fri" placeholder="ex: all day"></p>
-					<p>Saturday:<input type="text" name="sat" placeholder="ex: all day"></p>
-					<p>Sunday:<input type="text" name="sun" placeholder="ex: all day"></p>
-					<p>Notes: <textarea name="notes" placeholder="notes on my schedule..."></textarea></p>
+					<p>Monday:<input type="text" name="mon"
+						<?php if($schedule && $schedule['monday'] != '') { ?>
+							value="<?= $schedule['monday'] ?>"></p>
+						<?php } elseif (!$schedule || $schedule['monday'] == '') { ?>
+							placeholder="ex: all day"></p>
+						<?php } ?>
+					<p>Tuesday:<input type="text" name="tues"
+						<?php if($schedule && $schedule['tuesday'] != '') { ?>
+							value="<?= $schedule['tuesday'] ?>"></p>
+						<?php } elseif (!$schedule || $schedule['tuesday'] == '') { ?>
+							placeholder="ex: all day"></p>
+						<?php } ?>
+					<p>Wednesday:<input type="text" name="weds"
+						<?php if($schedule && $schedule['wednesday'] != '') { ?>
+							value="<?= $schedule['wednesday'] ?>"></p>
+						<?php } elseif (!$schedule || $schedule['wednesday'] == '') { ?>
+							placeholder="ex: all day"></p>
+						<?php } ?>
+					<p>Thursday:<input type="text" name="thurs"
+						<?php if($schedule && $schedule['thursday'] != '') { ?>
+							value="<?= $schedule['thursday'] ?>"></p>
+						<?php } elseif (!$schedule || $schedule['thursday'] == '') { ?>
+							placeholder="ex: all day"></p>
+						<?php } ?>
+					<p>Friday:<input type="text" name="fri"
+						<?php if($schedule && $schedule['friday'] != '') { ?>
+							value="<?= $schedule['friday'] ?>"></p>
+						<?php } elseif (!$schedule || $schedule['friday'] == '') { ?>
+							placeholder="ex: all day"></p>
+						<?php } ?>
+					<p>Saturday:<input type="text" name="sat"
+						<?php if($schedule && $schedule['saturday'] != '') { ?>
+							value="<?= $schedule['saturday'] ?>"></p>
+						<?php } elseif (!$schedule || $schedule['saturday'] == '') { ?>
+							placeholder="ex: all day"></p>
+						<?php } ?>
+					<p>Sunday:<input type="text" name="sun"
+						<?php if($schedule && $schedule['sunday'] != '') { ?>
+							value="<?= $schedule['sunday'] ?>"></p>
+						<?php } elseif (!$schedule || $schedule['sunday'] == '') { ?>
+							placeholder="ex: all day"></p>
+						<?php } ?>
+					<p>Notes: <textarea name="notes"
+					<?php if($schedule && $schedule['notes'] != '') { ?>
+						><?= $schedule['notes'] ?></textarea></p>
+					<?php } elseif (!$schedule || $schedule['notes'] == '') { ?>
+						placeholder="notes on my schedule..."></textarea></p>
+					<?php } ?>
 					<p><input class="ui inverted olive button" type="submit" name="submit" value="add times"></p>
 				</form>
 			</div>
@@ -86,5 +126,7 @@
 			</div>
 		</div>
 	</div>
+
+
 
 </div>

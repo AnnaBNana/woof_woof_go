@@ -5,7 +5,6 @@ class Traffic extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Query');
 		$this->load->helper(array('form', 'url'));
-		// $this->output->enable_profiler(TRUE);
 	}
 
 	public function index() {
@@ -21,6 +20,8 @@ class Traffic extends CI_Controller {
 			$reg['pets'] = $pets;
 			$users = $this->Query->get_user_imgs_rand($id);
 			$reg['imgs'] = $users;
+			$message_count = $this->Query->count_unread_messages($id);
+			$reg['msg_cnt'] = $message_count[0]['message_count'];
 			$this->load->view('header');
 			$this->load->view('navbar', $reg);
 			$this->load->view('welcome', $reg);
@@ -45,9 +46,8 @@ class Traffic extends CI_Controller {
 	public function edit($id) {
 		if ($this->session->userdata('login_status') == true && $id == $this->session->userdata['id']) {
 			$reg = $this->Query->get_user_by_id($id);
-			$reg['msg'] = '';
-			$pets = $this->Query->get_all_user_pets($id);
-			$reg['pets'] = $pets;
+			$schedule = $this->Query->get_user_schedule($id);
+			$reg['schedule'] = $schedule;
 			$this->load->view('header');
 			$this->load->view('navbar', $reg);
 			$this->load->view('edit', $reg);
@@ -114,6 +114,8 @@ class Traffic extends CI_Controller {
 			$reg = $this->Query->get_user_by_id($id);
 			$pets = $this->Query->get_all_user_pets($id);
 			$reg['pets'] = $pets;
+			$schedule = $this->Query->get_user_schedule($id);
+			$reg['schedule'] = $schedule;
 			$this->load->view('header');
 			$this->load->view('navbar', $reg);
 			$this->load->view('profile', $reg);
@@ -145,20 +147,6 @@ class Traffic extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('map', $reg);
 		$this->load->view('footer');
-	}
-	public function park($park_id) {
-		$reg['park_id'] = $park_id;
-		if ($this->session->userdata('login_status') == true) {
-			$reg['id'] = $this->session->userdata['id'];
-			$this->load->view('header');
-			$this->load->view('navbar');
-			$this->load->view('park', $reg);
-			$this->load->view('footer');
-		} else {
-			$this->load->view('header');
-			$this->load->view('park', $reg);
-			$this->load->view('footer');
-		}
 	}
 }
 

@@ -5,16 +5,28 @@ class Query extends CI_Model {
 		return $this->db->query("SELECT * FROM users WHERE email = ?", array($email))->row_array();
 	}
 	function add_user($new_user) {
-		$query = "INSERT INTO users (name, alias, email, password, created_at) VALUES (?, ?, ?, ?, ?)";
-		$values = array($new_user['name'], $new_user['alias'], $new_user['email'], $new_user['password'], date("Y-m-d, H:i:s"));
+		$query = "INSERT INTO users (name, alias, email, password, img_name, thumb_name, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		$values = array($new_user['name'], $new_user['alias'], $new_user['email'], $new_user['password'], 'default.jpg', 'thumbs/default.jpg', date("Y-m-d, H:i:s"));
 		return $this->db->query($query, $values);
 	}
 	function get_user_by_id($id) {
 		return $this->db->query("SELECT * FROM users WHERE id = ?", array($id))->row_array();
 	}
+	function get_user_schedule($id) {
+		return $this->db->query("SELECT * FROM schedule WHERE user_id = ?", array($id))->row_array();
+	}
 	function edit_user($change_user, $id) {
 		$query = "UPDATE users SET alias = ?, email = ?, about = ?, primary_city = ?, updated_at = ? WHERE id = ?";
 		$values = array($change_user['alias'], $change_user['email'], $change_user['about'], $change_user['loc'], date("Y-m-d, H:i:s"), $id);
+		return $this->db->query($query, $values);
+	}
+	function user_schedule($schedule, $id) {
+		// var_dump($schedule, $id);
+		// die();
+		$query = "INSERT INTO schedule (monday, tuesday, wednesday, thursday, friday, saturday, sunday, notes, user_id, created_at) VALUES (?,?,?,?,?,?,?,?,?,?) on duplicate key update monday = ?, tuesday = ?, wednesday = ?, thursday = ?, friday = ?, saturday = ?, sunday = ?, notes = ?, updated_at = ?;";
+
+		$values = array($schedule['monday'], $schedule['tuesday'], $schedule['wednesday'], $schedule['thursday'], $schedule['friday'], $schedule['saturday'], $schedule['sunday'], $schedule['notes'], $id, date("Y-m-d, H:i:s"), $schedule['monday'], $schedule['tuesday'], $schedule['wednesday'], $schedule['thursday'], $schedule['friday'], $schedule['saturday'], $schedule['sunday'], $schedule['notes'], date("Y-m-d, H:i:s"));
+
 		return $this->db->query($query, $values);
 	}
 	function add_pet($new_pet, $id) {
@@ -54,13 +66,16 @@ class Query extends CI_Model {
 		return $this->db->query("SELECT id, img_name, alias FROM users WHERE id != ? ORDER BY RAND() LIMIT 10", array($user_id))->result_array();
 	}
 	function get_user_imgs_by_date($user_id) {
-		return $this->db->query("SELECT id, img_name FROM users WHERE id != ? ORDER BY created_at DESC LIMIT 20", array($user_id))->result_array();
+		return $this->db->query("SELECT id, img_name, alias FROM users WHERE id != ? ORDER BY created_at DESC LIMIT 20", array($user_id))->result_array();
 	}
 	function get_all_users_messages($user_id) {
 		return $this->db->query("SELECT messages.id, messages.subject, messages.text, messages.status, messages.sender_id, messages.recip_id, messages.created_at, users.alias FROM messages LEFT JOIN users ON messages.sender_id=users.id WHERE recip_id = ?", array($user_id))->result_array();
 	}
 	function get_all_sent_messages($user_id) {
-		return $this->db->query("SELECT messages.id, messages.subject, messages.text, messages.status, messages.sender_id, messages.recip_id, messages.created_at, users.alias FROM messages LEFT JOIN users ON messages.sender_id = users.id WHERE sender_id = ?", array($user_id))->result_array();
+		return $this->db->query("SELECT messages.id, messages.subject, messages.text, messages.status, messages.sender_id, messages.recip_id, messages.created_at, users.alias AS recip_alias FROM messages LEFT JOIN users ON messages.recip_id = users.id WHERE sender_id = ?", array($user_id))->result_array();
+	}
+	function count_unread_messages($user_id) {
+		return $this->db->query("SELECT COUNT(*) AS message_count FROM messages WHERE recip_id = ? AND status = ?", array($user_id, 'unread'))->result_array();
 	}
 	function get_user_by_alias($alias) {
 		return $this->db->query("SELECT users.id, users.alias FROM users WHERE alias = ?", array($alias))->row_array();
@@ -81,6 +96,7 @@ class Query extends CI_Model {
 	function delete_msg($msg_id) {
 		return $this->db->query("DELETE FROM messages WHERE id = ?", $msg_id);
 	}
+
 }
 
 

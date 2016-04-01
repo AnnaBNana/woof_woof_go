@@ -3,7 +3,10 @@
 	<!-- user div -->
 	<div class="ui stackable padded grid">
 		<div class="four wide column">
-			<div class="ui padded inverted segment">
+			<div class="ui inverted segment">
+					<?php if($msg_cnt > 0) { ?>
+						<a class="ui olive ribbon label" href="/traffic/messages/<?= $id ?>"><?= $msg_cnt ?> New Message(s)</a>
+					<?php } ?>
 					<h1 class="ui center aligned olive inverted header"><?= $alias; ?> </h1>
 					<div class="ui inverted divider"></div>
 					<!-- there are several conditional here that make suggestions to add more profile info if not added upon registration -->
@@ -31,38 +34,39 @@
 							</button>
 					  </a>
 					</div>
+					<div class="ui center aligned inverted segment">
+						<a  href="/traffic/profile/<?= $this->session->userdata['id']; ?>">
+							<button class="ui inverted olive centered right labeled icon button">
+							View My Profile  <i class="write icon"></i>
+							</button>
+						</a>
+					</div>
 				</div>
 			</div>
 
-			<div class="eight wide column">
-				<div class="ui very padded raised center aligned olive segment">
+			<div class="center aligned  eight wide column">
 					<?php if($pets != null) { ?>
-							<h1 class="ui olive header">Browse other Users:</h1>
+							<h1 class="ui olive center aligned header">Browse other Users:</h1>
 							<div class="ui divider"></div>
 							<div class="ui stackable vertically padded four column grid">
-								<?php
-								foreach ($imgs as $img) {
-									if($img['img_name'] != null) { ?>
-											<div class="column">
-												<a href="/traffic/profile/<?= $img['id']; ?>">
-													<div class="ui circular image">
-													  <div class="ui dimmer">
-													    <div class="content">
-													      <div class="center">
-													        <h2 class="ui inverted olive header">
-													          <?= $img['alias']; ?>
-													        </h2>
-													      </div>
-													    </div>
-													  </div>
-														<img class="ui circular image" class="profile_img" src="../../uploads/<?= $img['img_name']; ?>">
-													</div>
-												</a>
+								<?php foreach ($imgs as $img) {?>
+									<div class="column">
+										<a href="/traffic/profile/<?= $img['id']; ?>">
+											<div class="ui circular image">
+											  <div class="ui dimmer">
+											    <div class="content">
+											      <div class="center">
+											        <h2 class="ui inverted olive header">
+											          <?= $img['alias']; ?>
+											        </h2>
+											      </div>
+											    </div>
+											  </div>
+												<img class="ui circular image" src="../../uploads/<?= $img['img_name']; ?>">
 											</div>
-										<?php
-									}
-								}
-								?>
+										</a>
+									</div>
+								<?php } ?>
 							</div>
 							<div class="ui stackable sixteen column centered grid">
 								<div class="sixteen column centered row">
@@ -70,7 +74,6 @@
 								</div>
 							</div>
 					<?php } ?>
-			</div>
 			</div>
 
 			<div class="four wide column">
@@ -86,8 +89,7 @@
 							<p class="small_title">SPECIES: <?= $pet['species']; ?></p>
 							<p class="small_title">BREED: <?= $pet['breed']; ?></p>
 							<?php if($pet['about'] != null) { ?>
-								<p class="small_title">ABOUT:</p>
-								<p><?= $pet['about']; ?></p>
+								<p>ABOUT: <?= $pet['about']; ?></p>
 							<?php } ?>
 							<?php if($pet['img_name'] != null) { ?>
 								<p class="pet_pic"><img class="ui centered circular image" src="../../uploads/<?= $pet['img_name']; ?>"></p>
