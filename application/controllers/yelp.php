@@ -184,10 +184,19 @@ class Yelp extends CI_Controller {
 
   public function park($park_id, $park_name, $park_loc) {
     $req = $this->query_api($park_name, $park_loc);
-    $park_data = json_decode($req);
+    $park_data = json_decode($req, true);
+    $yelp_data = array(
+      "rating_img_url" => $park_data['rating_img_url_large'],
+      "review_count" => $park_data['review_count'],
+      "url" => $park_data['url'],
+      "reviews" => $park_data['reviews'][0],
+      "image_url" => $park_data['image_url'],
+      "review_image_url" => $park_data['snippet_image_url']
+    );
     // var_dump($park_data);
     // die();
     $reg['park_id'] = $park_id;
+    $reg['yelp_data'] = $yelp_data;
     if ($this->session->userdata('login_status') == true) {
       $reg['id'] = $this->session->userdata['id'];
       $this->load->view('header');

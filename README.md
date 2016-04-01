@@ -7,8 +7,8 @@ Includes interactive Google map with details for each dog park location.  Users 
 Users can view pet details, decide on suitable play mates for pets, and send messages to other users.
 
 ###To Do:
-- [ ] Build out Yelp functionality on parks pages
+- [x] Build out Yelp functionality on parks pages
 - [ ] Add friend system
 - [ ] Make active users visible on map
 - [ ] Add option to toggle visibility
-- [ ] Allow users to focus map location based upon zip code in case they have disabled location services
+- [x] Allow users to focus map location based upon zip code in case they have disabled location services
