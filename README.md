@@ -1,4 +1,4 @@
-#Woof Woof Go!
+# Woof Woof Go!
 
 An interactive web platform for dog owners, Woof Woof Go is a place for owners to meet, become friends, share favorite walks, view others online, make plans, meet, and play.
 
@@ -6,7 +6,7 @@ Includes interactive Google map with details for each dog park location.  Users 
 
 Users can view pet details, decide on suitable play mates for pets, and send messages to other users.
 
-###To Do:
+### To Do:
 - [x] Build out Yelp functionality on parks pages
 - [ ] Add friend system
 - [ ] Make active users visible on map
